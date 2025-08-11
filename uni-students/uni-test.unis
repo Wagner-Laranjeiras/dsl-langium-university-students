@@ -1,0 +1,18 @@
+// Declarations of students and their age
+student Alice age 25
+student Bob age 15
+
+// Declarations of university disciplines
+discipline Computer_Science
+discipline Law
+discipline Vogon_Poetry
+
+// Declarations of universities where you can study
+university CAU {
+    // List of disciplines offered at this university (cross-references)
+    disciplines Computer_Science, Law //, Vogon_Poetry
+}
+
+// Statements about who studies what and where (these are all cross-references)
+Alice studies Computer_Science at CAU
+Bob studies Vogon_Poetry at CAU

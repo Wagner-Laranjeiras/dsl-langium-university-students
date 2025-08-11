@@ -1,0 +1,16 @@
+{
+    "projectName": "UniversityStudents",
+    "languages": [
+        {
+            "id": "university-students",
+            "grammar": "src/university-students.langium",
+            "fileExtensions": [
+                "unis"
+            ],
+            "textMate": {
+                "out": "syntaxes/university-students.tmLanguage.json"
+            }
+        }
+    ],
+    "out": "src/generated"
+}
