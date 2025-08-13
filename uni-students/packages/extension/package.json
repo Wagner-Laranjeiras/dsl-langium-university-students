@@ -21,7 +21,13 @@
             "language": "university-students",
             "scopeName": "source.university-students",
             "path": "syntaxes/university-students.tmLanguage.json"
-        }]
+        }],
+        "commands": [
+            {
+            "command": "universityStudents.showWebview",
+            "title": "Show University Students Webview"
+            }
+        ]
     },
     "activationEvents": [
         "onLanguage:university-students"

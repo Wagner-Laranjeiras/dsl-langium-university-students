@@ -1,5 +1,5 @@
 import type { LanguageClientOptions, ServerOptions } from 'vscode-languageclient/node.js';
-import type * as vscode from 'vscode';
+import * as vscode from 'vscode';
 import * as path from 'node:path';
 import { LanguageClient, TransportKind } from 'vscode-languageclient/node.js';
 
@@ -8,7 +8,40 @@ let client: LanguageClient;
 // This function is called when the extension is activated.
 export async function activate(context: vscode.ExtensionContext): Promise<void> {
     client = await startLanguageClient(context);
+
+    // Register our Webview command
+    const disposable = vscode.commands.registerCommand('universityStudents.showWebview', () => {
+        const panel = vscode.window.createWebviewPanel(
+            'universityStudentsWebview',          // internal id
+            'University Students View',           // tab title
+            vscode.ViewColumn.One,                 // where to show
+            { enableScripts: true }                 // allow JS in the webview
+        );
+
+        // Set HTML content
+        panel.webview.html = getWebviewContent();
+    });
+
+    context.subscriptions.push(disposable);
 }
+
+function getWebviewContent(): string {
+    return `
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>University Students</title>
+    </head>
+    <body>
+        <h1>Hello from the Webview!</h1>
+        <p>This is an empty page for now.</p>
+    </body>
+    </html>
+    `;
+}
+
 
 // This function is called when the extension is deactivated.
 export function deactivate(): Thenable<void> | undefined {

@@ -21,7 +21,7 @@ export function registerValidationChecks(services: UniversityStudentsServices) {
 export class UniversityStudentsValidator {
     checkStudent(student: Student, accept: ValidationAcceptor): void {
         if (!student.age) return
-        const MIN_AGE: number = 18;
+        const MIN_AGE: number = 10;
         // Check for student's age
         student.age < MIN_AGE
             ? accept('error', `Student needs to be of age ${MIN_AGE}+`, { node: student, property: 'age' })
