@@ -1,6 +1,6 @@
 // Declarations of students and their age
 student Alice age 25
-student Bob age 15
+student Bob age 8
 
 // Declarations of university disciplines
 discipline Computer_Science

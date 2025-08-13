@@ -15,30 +15,38 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
             'universityStudentsWebview',          // internal id
             'University Students View',           // tab title
             vscode.ViewColumn.One,                 // where to show
-            { enableScripts: true }                 // allow JS in the webview
+            { 
+                enableScripts: true, // allow JS in the webview
+                localResourceRoots: [vscode.Uri.joinPath(context.extensionUri, 'out', 'react-webview')], // Allow webview to load files from out/react-webview
+
+            }                 
         );
 
+        const scriptUri = panel.webview.asWebviewUri(
+            vscode.Uri.joinPath(context.extensionUri, 'out', 'react-webview', 'main.js')
+        )
+
         // Set HTML content
-        panel.webview.html = getWebviewContent();
+        panel.webview.html = getWebviewContent(scriptUri);
     });
 
     context.subscriptions.push(disposable);
 }
 
-function getWebviewContent(): string {
+function getWebviewContent(content: vscode.Uri): string {
     return `
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>University Students</title>
-    </head>
-    <body>
-        <h1>Hello from the Webview!</h1>
-        <p>This is an empty page for now!</p>
-    </body>
-    </html>
+    <!doctype html>
+      <html lang="en">
+        <head>
+          <meta charset="utf-8" />
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+          <title>React Webview</title>
+        </head>
+        <body>
+          <div id="root"></div>
+          <script src="${content.toString()}"></script>
+        </body>
+      </html>
     `;
 }
 

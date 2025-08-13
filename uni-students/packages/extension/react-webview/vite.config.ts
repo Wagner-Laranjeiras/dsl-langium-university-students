@@ -7,7 +7,14 @@ export default defineConfig({
   plugins: [react()],
   base: '',
   build: {
-    outDir: path.resolve(__dirname, '../dist-webview'), // output into extension folder
-    emptyOutDir: true
+    outDir: path.resolve(__dirname, '../out/react-webview'), // <-- build into extension/out
+    emptyOutDir: true,
+    rollupOptions: {
+      output: {
+        entryFileNames: 'main.js',            // deterministic file names
+        chunkFileNames: 'chunks/[name].js',
+        assetFileNames: 'assets/[name][extname]'
+      }
+    }
   }
 })
