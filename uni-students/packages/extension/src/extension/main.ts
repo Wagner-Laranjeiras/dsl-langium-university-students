@@ -36,7 +36,7 @@ function getWebviewContent(): string {
     </head>
     <body>
         <h1>Hello from the Webview!</h1>
-        <p>This is an empty page for now.</p>
+        <p>This is an empty page for now!</p>
     </body>
     </html>
     `;
